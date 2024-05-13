@@ -4,12 +4,27 @@
 % used are: support vector machines (SVMs), linear discriminant analysis 
 % (LDA), and decision trees. 
 
-% clc; clear; close all;
+clc; clear; close all;
 
 %% load data
-load('/Users/ajsimon/Documents/INP599/Final_project/data/connmats_235.mat');
 load('/Users/ajsimon/Documents/INP599/Final_project/data/diagnostic_labels.mat');
 load('/Users/ajsimon/Documents/INP599/Final_project/data/sublist_235.mat');
+
+ixs = {'1','2','3','4','5','6','7','8','9','10'};
+
+for i = 1:length(ixs)
+    input = sprintf('/Users/ajsimon/Documents/INP599/Final_project/data/connmats_%s.mat',ixs{i});
+    load(input);
+    if i == 1
+        mats_new = mats;
+    else
+        mats_new = cat(3,mats_new,mats);
+    end
+    clear mats
+end
+
+mats = mats_new;
+clear mats_new
 
 %% setup the data
 % set parameters
